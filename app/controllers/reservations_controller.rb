@@ -4,7 +4,11 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.all
+    @reservations = policy_scope(Reservation).where(week:Date.today.cweek)
+    monday = Date.today.next_occurring(:monday).day - 7
+    @days = (monday..(monday + 4)).to_a
+    @reservations_hash = generate_reservations_hash(@reservations, @days)
+    @reservation = Reservation.new
   end
 
   # GET /reservations/1 or /reservations/1.json
@@ -69,5 +73,15 @@ class ReservationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reservation_params
       params.require(:reservation).permit(:description, :hour, :day, :week, :month, :year)
+    end
+
+    def generate_reservations_hash(reservations, days)
+      reservations_hash = days.each_with_object({}) do |day, hash|
+        hash[day] = {}
+      end
+      reservations.each do |reservation|
+        reservations_hash[reservation.day][reservation.hour] = reservation if reservation_hash[reservation.day]
+      end
+      reservations_hash
     end
 end

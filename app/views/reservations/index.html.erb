@@ -1,37 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Reservations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Hour</th>
-      <th>Day</th>
-      <th>Week</th>
-      <th>Month</th>
-      <th>Year</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reservations.each do |reservation| %>
+<div class="container">
+  <h1>Reservations Room</h1>
+  <table class = "table table-striped">
+    <thead>
       <tr>
-        <td><%= reservation.description %></td>
-        <td><%= reservation.hour %></td>
-        <td><%= reservation.day %></td>
-        <td><%= reservation.week %></td>
-        <td><%= reservation.month %></td>
-        <td><%= reservation.year %></td>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">Time</th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+        <th scope="col">Thursday</th>
+        <th scope="col">Friday</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% (6..23).to_a.each do |time| %>
+        <tr>
+          <th scope="row"><%= "#{time}:00" %></th>
+          <% @days.each do |day| %>
+            <td>
+              <% if @reservations_hash[day][time] %>
+                <%= "Reservado p/ #{@reservations_hash[day][time].user.name}" %>
+                  <% if policy(@reservations_hash[day][time]).update? %>
+                  <a href="#" class="" data-toggle="modal" data-target="#edit-booking-modal-<%= @reservations_hash[day][time].id %>" data-date="<%= day %>" data-time="<%= time %>">Editar |</a> 
+                  <%= link_to 'Deletar', booking_path(@reservations_hash[day][time]), method: :delete, remote: true, data: {confirm: 'Deseja deletar a reserva?'} %>
+                  <%= render 'form', booking: @reservations_hash[day][time] %>
+                  <% end %>
+              <% else %> 
+                  <a href="#" class="" data-toggle="modal" data-target="#exampleModal" data-date="<%= day %>" data-time="<%= time %>">Disponível</a>
+              <% end %>
+            </td>
+          <% end %>  
+        </tr>
+      <% end %> 
+    </tbody>
+  </table>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+  
+</div>
