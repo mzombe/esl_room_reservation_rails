@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_reservation, only: %i[ show edit update destroy ]
 
   # GET /reservations or /reservations.json
@@ -12,7 +13,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @reservation = Reservation.new
+    @reservation = current_user.reservations.new
   end
 
   # GET /reservations/1/edit
@@ -21,7 +22,7 @@ class ReservationsController < ApplicationController
 
   # POST /reservations or /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = current_user.reservations.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
