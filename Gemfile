@@ -5,6 +5,7 @@ ruby '3.0.4'
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'pg', '~> 1.4', '>= 1.4.3', group: :production
+gem "pundit", "~> 2.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6', '>= 6.1.6.1'
