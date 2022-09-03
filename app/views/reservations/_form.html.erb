@@ -1,47 +1,26 @@
-<%= form_with(model: reservation) do |form| %>
-  <% if reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
-
-      <ul>
-        <% reservation.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="modal fade" id="edit-reservation-modal-<%= reservation.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reservation Not Avaliable</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: @reservation, method: :patch, local: true) do %> 
+            <p>Booking time: <%= "#{reservation.hour}" %>:00 </p>
+            <p>Booking date: <%= "#{reservation.day}" "#{Date.today.month}/#{Date.today.year}" %> </p>
+            <div class="form-group">
+              <%= hidden_field_tag "reservation[day]", @reservation.day, id: "date-input"%>
+              <%= hidden_field_tag "reservation[hour]", @reservation.hour ,id: "time-input"%>
+              <%= label_tag "reservation[description]", "Reservation Description: ", class: "col-form-label" %>
+              <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control" %>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= submit_tag "Refresh", class: "btn btn-primary" %>
+      </div>
+          <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
   </div>
-
-  <div class="field">
-    <%= form.label :hour %>
-    <%= form.number_field :hour %>
-  </div>
-
-  <div class="field">
-    <%= form.label :day %>
-    <%= form.number_field :day %>
-  </div>
-
-  <div class="field">
-    <%= form.label :week %>
-    <%= form.number_field :week %>
-  </div>
-
-  <div class="field">
-    <%= form.label :month %>
-    <%= form.number_field :month %>
-  </div>
-
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
