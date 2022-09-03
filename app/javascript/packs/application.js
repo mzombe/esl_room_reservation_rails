@@ -48,22 +48,49 @@ document.addEventListener('turbolinks:load', () => {
            reciveHour.innerText = hour;
            reciveInputDD.value = ddAttr;
            reciveInputHour.value = hour;
+           
+           switch (true) {
+            case (ddAttr == -2):
+                title.innerText = "Book on Monday";
+              break;
+            case (ddAttr == -1):
+                title.innerText = "Book on Tuesday";
+              break;
+            case (ddAttr == 0):
+                title.innerText = "Book on Wednesday";
+              break;
+            case (ddAttr == 1):
+                title.innerText = "Book on Thursday";
+              break;
+            case (ddAttr == 2):
+                title.innerText = "Book on Friday";
+              break;
+          }
+        
+        });
+    } );
+    const itensCallModalEdit = document.querySelectorAll(".callModalEdit");
+    itensCallModalEdit.forEach( (item)=>{
+        item.addEventListener("click", (event)=>{ 
+
+            var ddAttr = item.getAttribute("data-date");
+            const title = document.querySelector(".reservation-title");
 
            switch (true) {
             case (ddAttr == -2):
-                title.innerText = "book on monday";
+                title.innerText = "Monday";
               break;
             case (ddAttr == -1):
-                title.innerText = "book on tuesday";
+                title.innerText = "Tuesday";
               break;
             case (ddAttr == 0):
-                title.innerText = "book on wednesday";
+                title.innerText = "Wednesday";
               break;
             case (ddAttr == 1):
-                title.innerText = "book on thursday";
+                title.innerText = "Thursday";
               break;
             case (ddAttr == 2):
-                title.innerText = "book on friday";
+                title.innerText = "Friday";
               break;
           }
         

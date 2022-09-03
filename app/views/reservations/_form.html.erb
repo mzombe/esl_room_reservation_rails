@@ -2,23 +2,22 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reservation Not Avaliable</h5>
+        <h5 class="modal-title text-secondary reservation-title" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with(model: @reservation, method: :patch, local: true) do %> 
-            <p>Booking time: <%= "#{reservation.hour}" %>:00 </p>
-            <p>Booking date: <%= "#{reservation.day}" "#{Date.today.month}/#{Date.today.year}" %> </p>
-            <div class="form-group">
+        <%= form_with(model: reservation , method: :patch, local: true) do %> 
+            <p class="text-center text-secondary">Ttime: <%= "#{reservation.hour}" %>:00 </p>
+            <p class="text-center text-secondary">Date: <%= "#{reservation.day * -1}""/#{Date.today.month}/#{Date.today.year}" %> </p>
+            <div class=" text-secondary">
               <%= hidden_field_tag "reservation[day]", @reservation.day, id: "date-input"%>
               <%= hidden_field_tag "reservation[hour]", @reservation.hour ,id: "time-input"%>
-              <%= label_tag "reservation[description]", "Reservation Description: ", class: "col-form-label" %>
-              <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control" %>
+              <%= label_tag "reservation[description]", "Description: ", class: "col-form-label fs-2" %>
+              <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control", id:'text-area' %>
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= submit_tag "Refresh", class: "btn btn-primary" %>
+        <%= submit_tag 'Update', class: "btn btn-outline-primary" %> 
       </div>
           <% end %>
     </div>

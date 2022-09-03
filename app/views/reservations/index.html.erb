@@ -1,6 +1,6 @@
 <div class="container mt-3">
-  <h1 class="">Reservations Room:</h1>
-  <table class = "table table-dark table-striped">
+  <h1 class="mb-3">Reservations Room:</h1>
+  <table class = "table table-primary table-striped">
     <thead>
       <tr>
         <th scope="col" class="text-center">Time</th>
@@ -20,18 +20,21 @@
             <td class="text-center">
               <% if @reservations_hash[day][time] %>
                   <% if policy(@reservations_hash[day][time]).update? %>
-                    <a href="#" class="fs-6 not-decoration" data-toggle="modal" data-target="#edit-reservation-modal-<%= @reservations_hash[day][time].id %>" data-date="<%= day %>" data-time="<%= time %>">
+                    <a href="" class="fs-6 not-decoration callModalEdit" data-bs-toggle="modal" data-bs-target="#edit-reservation-modal-<%= @reservations_hash[day][time].id %>" data-date="<%= day %>" data-time="<%= time %>">
                       <%= "#{@reservations_hash[day][time].user.email}" %> 
                     </a>
                     <%= link_to '&olarr;'.html_safe, reservation_path(@reservations_hash[day][time]), method: :delete, remote: true, data: {confirm: 'Do you want to delete the reservation?'}, class:'font-size-entity not-decoration'%>
                     <%= render 'form', reservation: @reservations_hash[day][time] %> 
                   <% end %>
               <% else %> 
-                  <button type="button" class="btn btn-link callModal " data-bs-toggle="modal" data-bs-target="#exampleModal" data-date="<%= day %>" data-time="<%= time %>">
+                <% if user_signed_in? %>
+                    <a class="callModal link-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal" data-date="<%= day %>" data-time="<%= time %>">
                     Avaliable
-                  </button>
-              <% end %>
-              
+                    </a>
+                  <% else %>
+                  <%= link_to '&minus;'.html_safe , new_user_session_path, class:'not-decoration'%>
+                <% end %>
+              <% end %>  
             </td>
           <% end %>  
         </tr>
@@ -47,19 +50,19 @@
         <h5 class="modal-title reservation-title" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center">
         <%= form_with(model: @reservation, url: reservations_path, method: :post, remote: true) do %> 
-            <p>Booking time: <span id="reservation-time"></span>:00 </p>
-            <p>Booking date: <span id="reservation-date"></span>/<%= "#{Date.today.month}/#{Date.today.year}" %> </p>
-            <div class="form-group">
+            <p class="text-center text-secondary">Time: <span id="reservation-time"></span>:00 </p>
+            <p class="text-center text-secondary">Date: <span id="reservation-date"></span>/<%= "#{Date.today.month}/#{Date.today.year}" %> </p>
+            <div class="form-group text-secondary">
               <%= hidden_field_tag "reservation[day]", @reservation.day, id: "date-input", value: 0 %>
               <%= hidden_field_tag "reservation[hour]", @reservation.hour ,id: "time-input", value: 0 %>
-              <%= label_tag "reservation[description]", "Detalhes da reserva: ", class: "col-form-label" %>
+              <%= label_tag "reservation[description]", "Description: ", class: "col-form-label fs-2 " %>
               <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control" %>
             </div>
       </div>
       <div class="modal-footer">
-        <%= submit_tag "Reserve", class: "btn btn-primary" %>
+        <%= submit_tag "Reserve", class: "btn btn-outline-primary" %>
       </div>
           <% end %>
     </div>

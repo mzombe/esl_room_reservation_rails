@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_reservation, only: %i[ show edit update destroy ]
 
   # GET /reservations or /reservations.json
@@ -33,7 +33,6 @@ class ReservationsController < ApplicationController
     @reservation.year = today.year
     flash[:notice] = 'Reservation made successfully!' if @reservation.save
     redirect_to root_path
-    # authorize @reservation
   end
 
   # PATCH/PUT /reservations/1 or /reservations/1.json
@@ -41,7 +40,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @reservation.update(description: params[:reservation][:description])
     redirect_to root_path
-    # authorize @reservation
+    authorize @reservation
   end
 
   # DELETE /reservations/1 or /reservations/1.json
@@ -49,14 +48,14 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
     redirect_to root_path
-    # authorize @reservation
+    authorize @reservation
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
-      # authorize @reservation
+      authorize @reservation
     end
 
     # Only allow a list of trusted parameters through.
