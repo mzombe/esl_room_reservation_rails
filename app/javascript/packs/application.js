@@ -20,7 +20,7 @@ require('jquery')
 require("@popperjs/core")
 
 document.addEventListener('turbolinks:load', () => {
-
+  // Bootstrap -------------------------------------------------
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new Tooltip(tooltipTriggerEl)
@@ -30,6 +30,7 @@ document.addEventListener('turbolinks:load', () => {
     var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
         return new Popover(popoverTriggerEl)
     })
+// --------------------------------------------------------------
 
     const date = new Date();
     var dd = String(date.getDate()).padStart(2, '0');
@@ -39,11 +40,11 @@ document.addEventListener('turbolinks:load', () => {
         item.addEventListener("click", (event)=>{ 
            var hour = item.getAttribute("data-time");
            var ddAttr = item.getAttribute("data-date");
-           const reciveDD = document.querySelector("#reservation-date");
-           const reciveHour = document.querySelector("#reservation-time");
-           const reciveInputDD = document.querySelector("#date-input");
-           const reciveInputHour = document.querySelector("#time-input");
-           const title = document.querySelector(".reservation-title");
+           var reciveDD = document.getElementById("reservation-date");
+           var reciveHour = document.getElementById("reservation-time");
+           var reciveInputDD = document.getElementById("date-input");
+           var reciveInputHour = document.getElementById("time-input");
+           var title = document.querySelector(".reservation-title");
 
            reciveDD.innerText = dd;
            reciveHour.innerText = hour;
@@ -75,8 +76,8 @@ document.addEventListener('turbolinks:load', () => {
         item.addEventListener("click", (event)=>{ 
 
             var ddAttr = item.getAttribute("data-date");
-            const title = document.querySelector(".reservation-title");
-            var ddForm = document.querySelector("#data-form");
+            var title = document.querySelector(".reservation-title");
+            var ddForm = document.getElementById("data-form");
             
             ddForm.innerText = dd;
 
@@ -97,8 +98,9 @@ document.addEventListener('turbolinks:load', () => {
                 title.innerText = "Friday";
               break;
           }
-        
         });
     } );
-    
+  
+
+
   });

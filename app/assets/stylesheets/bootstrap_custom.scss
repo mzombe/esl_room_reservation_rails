@@ -2,6 +2,20 @@
     font-size: 20px;
 }
 
+.link-joao {
+    background: #ff00cc;
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    background: linear-gradient(to right, #333399, #ff00cc);
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+    background-size: 0 0.1em;
+    transition: background-size 400ms ease-in;
+}
+
+.link-joao:hover {
+    background-size: 100% 0.1em;
+}
+
 .card {
     align-items: center;
     margin-left:40vw;

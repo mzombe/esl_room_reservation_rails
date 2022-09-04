@@ -13,6 +13,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1 or /reservations/1.json
   def show
+
   end
 
   # GET /reservations/new
@@ -47,7 +48,7 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
-    redirect_to root_path
+    redirect_to reservations_path
     authorize @reservation
   end
 
