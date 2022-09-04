@@ -19,10 +19,10 @@
           <% @days.each do |day| %>
             <td class="text-center">
               <% if @reservations_hash[day][time] %>
-                  <% if policy(@reservations_hash[day][time]).update? %>
                     <a href="" class="fs-6 not-decoration callModalEdit" data-bs-toggle="modal" data-bs-target="#edit-reservation-modal-<%= @reservations_hash[day][time].id %>" data-date="<%= day %>" data-time="<%= time %>">
                       <%= "#{@reservations_hash[day][time].user.email}" %> 
                     </a>
+                  <% if policy(@reservations_hash[day][time]).update? %>
                     <%= link_to '&olarr;'.html_safe, reservation_path(@reservations_hash[day][time]), method: :delete, remote: true, data: {confirm: 'Do you want to delete the reservation?'}, class:'font-size-entity not-decoration'%>
                     <%= render 'form', reservation: @reservations_hash[day][time] %> 
                   <% end %>

@@ -7,13 +7,13 @@
       </div>
       <div class="modal-body">
         <%= form_with(model: reservation , method: :patch, local: true) do %> 
-            <p class="text-center text-secondary">Ttime: <%= "#{reservation.hour}" %>:00 </p>
+            <p class="text-center text-secondary">Time: <%= "#{reservation.hour}" %>:00 </p>
             <p class="text-center text-secondary">Date: <%= "#{reservation.day * -1}""/#{Date.today.month}/#{Date.today.year}" %> </p>
             <div class=" text-secondary">
               <%= hidden_field_tag "reservation[day]", @reservation.day, id: "date-input"%>
               <%= hidden_field_tag "reservation[hour]", @reservation.hour ,id: "time-input"%>
               <%= label_tag "reservation[description]", "Description: ", class: "col-form-label fs-2" %>
-              <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control", id:'text-area' %>
+              <%= text_area_tag "reservation[description]", @reservation.description, class: "form-control", id:'text-area', placeholder: "#{reservation.description}" %>
             </div>
       </div>
       <div class="modal-footer">

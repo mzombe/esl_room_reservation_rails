@@ -10,19 +10,11 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def update?
-    if user.admin?
-      true
-    else
-      user.id == record.user.id
-    end
+    record.user == user 
   end
 
   def destroy?
-    if user.admin?
-      true
-    else
-      user.id == record.user.id
-    end
+    record.user == user
   end
 
 end
