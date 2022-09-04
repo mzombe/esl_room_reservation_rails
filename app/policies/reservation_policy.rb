@@ -10,11 +10,19 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user 
+    if user.methods.include?(:admin)
+      user.admin? || record.user == user 
+    else
+      record.user == user 
+    end
   end
 
   def destroy?
-    record.user == user
+    if user.methods.include?(:admin)
+      user.admin? || record.user == user 
+    else
+      record.user == user 
+    end
   end
 
 end

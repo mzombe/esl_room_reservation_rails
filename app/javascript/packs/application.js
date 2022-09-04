@@ -31,11 +31,12 @@ document.addEventListener('turbolinks:load', () => {
         return new Popover(popoverTriggerEl)
     })
 
+    const date = new Date();
+    var dd = String(date.getDate()).padStart(2, '0');
+
     const itensCallModal = document.querySelectorAll(".callModal");
     itensCallModal.forEach( (item)=>{
         item.addEventListener("click", (event)=>{ 
-           const date = new Date();
-           var dd = String(date.getDate()).padStart(2, '0');
            var hour = item.getAttribute("data-time");
            var ddAttr = item.getAttribute("data-date");
            const reciveDD = document.querySelector("#reservation-date");
@@ -75,6 +76,9 @@ document.addEventListener('turbolinks:load', () => {
 
             var ddAttr = item.getAttribute("data-date");
             const title = document.querySelector(".reservation-title");
+            var ddForm = document.querySelector("#data-form");
+            
+            ddForm.innerText = dd;
 
            switch (true) {
             case (ddAttr == -2):
