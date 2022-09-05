@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Essa aplicação foi feita como um teste para vaga de programador na empresa ESL Sistemas.
 
+Ruby version: 3.0.4
 
+Rails version: 6.1.6.1
 
-* Ruby version
+Devise version: 4.8.1
 
-* System dependencies
+sqlite3 version: 1.4
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+pg version: 1.4.3
