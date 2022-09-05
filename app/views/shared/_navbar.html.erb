@@ -1,13 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-between px-2 pb-3">
   <div class="container-fluid d-flex justify-content-between">
     <a href="https://eslsistemas.com.br" class="link-light fs-4 list-group-item" target="_blank" rel="noopener noreferrer"><img src="https://eslsistemas.com.br/wp-content/uploads/2022/02/logo-horizontal.png" alt="ESL"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="" id="navbarSupportedContent">
-      <a href="https://joaocarmona.carrd.co" class="link-light fs-2 list-group-item" target="_blank" rel="noopener noreferrer">João Vitor Carmona</a>
+    <div class="">
+      <a href="https://joaocarmona.carrd.co" class="link-light fs-2 list-group-item mt-3" target="_blank" rel="noopener noreferrer">João Vitor Carmona</a>
     </div>
-      <div class="d-flex">
+      <div class="d-flex mt-2">
         <% if user_signed_in? %>
             <%= link_to current_user.email, edit_user_registration_path, class:"nav-link pe-1 text-light" %> 
             <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link ps-1" %> 
